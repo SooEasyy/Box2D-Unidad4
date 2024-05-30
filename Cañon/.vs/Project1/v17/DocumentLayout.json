@@ -1,0 +1,183 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{276283F6-17CE-4A8C-A664-3064207FF7BF}|Project1\\Project1.vcxproj|D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Ragdoll.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{276283F6-17CE-4A8C-A664-3064207FF7BF}|Project1\\Project1.vcxproj|solutionrelative:Project1\\Ragdoll.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{276283F6-17CE-4A8C-A664-3064207FF7BF}|Project1\\Project1.vcxproj|D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Cannon.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{276283F6-17CE-4A8C-A664-3064207FF7BF}|Project1\\Project1.vcxproj|solutionrelative:Project1\\Cannon.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{276283F6-17CE-4A8C-A664-3064207FF7BF}|Project1\\Project1.vcxproj|D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Cannon.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{276283F6-17CE-4A8C-A664-3064207FF7BF}|Project1\\Project1.vcxproj|solutionrelative:Project1\\Cannon.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{276283F6-17CE-4A8C-A664-3064207FF7BF}|Project1\\Project1.vcxproj|D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Objeto.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{276283F6-17CE-4A8C-A664-3064207FF7BF}|Project1\\Project1.vcxproj|solutionrelative:Project1\\Objeto.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{276283F6-17CE-4A8C-A664-3064207FF7BF}|Project1\\Project1.vcxproj|D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{276283F6-17CE-4A8C-A664-3064207FF7BF}|Project1\\Project1.vcxproj|solutionrelative:Project1\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{276283F6-17CE-4A8C-A664-3064207FF7BF}|Project1\\Project1.vcxproj|D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{276283F6-17CE-4A8C-A664-3064207FF7BF}|Project1\\Project1.vcxproj|solutionrelative:Project1\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{276283F6-17CE-4A8C-A664-3064207FF7BF}|Project1\\Project1.vcxproj|D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{276283F6-17CE-4A8C-A664-3064207FF7BF}|Project1\\Project1.vcxproj|solutionrelative:Project1\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{276283F6-17CE-4A8C-A664-3064207FF7BF}|Project1\\Project1.vcxproj|D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Objeto.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{276283F6-17CE-4A8C-A664-3064207FF7BF}|Project1\\Project1.vcxproj|solutionrelative:Project1\\Objeto.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{276283F6-17CE-4A8C-A664-3064207FF7BF}|Project1\\Project1.vcxproj|D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Ragdoll.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{276283F6-17CE-4A8C-A664-3064207FF7BF}|Project1\\Project1.vcxproj|solutionrelative:Project1\\Ragdoll.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 65,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 335,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Cannon.h",
+              "DocumentMoniker": "D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Cannon.h",
+              "RelativeDocumentMoniker": "Project1\\Cannon.h",
+              "ToolTip": "D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Cannon.h",
+              "RelativeToolTip": "Project1\\Cannon.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-30T18:38:04.104Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Objeto.cpp",
+              "DocumentMoniker": "D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Objeto.cpp",
+              "RelativeDocumentMoniker": "Project1\\Objeto.cpp",
+              "ToolTip": "D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Objeto.cpp",
+              "RelativeToolTip": "Project1\\Objeto.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-30T18:27:35.584Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Objeto.h",
+              "DocumentMoniker": "D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Objeto.h",
+              "RelativeDocumentMoniker": "Project1\\Objeto.h",
+              "ToolTip": "D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Objeto.h",
+              "RelativeToolTip": "Project1\\Objeto.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-30T18:27:28.995Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Ragdoll.h",
+              "DocumentMoniker": "D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Ragdoll.h",
+              "RelativeDocumentMoniker": "Project1\\Ragdoll.h",
+              "ToolTip": "D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Ragdoll.h",
+              "RelativeToolTip": "Project1\\Ragdoll.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-29T19:01:11.376Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Game.h",
+              "DocumentMoniker": "D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Game.h",
+              "RelativeDocumentMoniker": "Project1\\Game.h",
+              "ToolTip": "D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Game.h",
+              "RelativeToolTip": "Project1\\Game.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-29T19:01:05.004Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Ragdoll.cpp",
+              "DocumentMoniker": "D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Ragdoll.cpp",
+              "RelativeDocumentMoniker": "Project1\\Ragdoll.cpp",
+              "ToolTip": "D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Ragdoll.cpp",
+              "RelativeToolTip": "Project1\\Ragdoll.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAB4AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-29T18:59:58.19Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Cannon.cpp",
+              "DocumentMoniker": "D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Cannon.cpp",
+              "RelativeDocumentMoniker": "Project1\\Cannon.cpp",
+              "ToolTip": "D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Cannon.cpp",
+              "RelativeToolTip": "Project1\\Cannon.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-29T18:59:05.829Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Main.cpp",
+              "DocumentMoniker": "D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Main.cpp",
+              "RelativeDocumentMoniker": "Project1\\Main.cpp",
+              "ToolTip": "D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Main.cpp",
+              "RelativeToolTip": "Project1\\Main.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-29T18:56:27.545Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Game.cpp",
+              "DocumentMoniker": "D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Game.cpp",
+              "RelativeDocumentMoniker": "Project1\\Game.cpp",
+              "ToolTip": "D:\\VS Proyects\\MAVI2\\Unidad4\\Ca\u00F1on\\Project1\\Game.cpp",
+              "RelativeToolTip": "Project1\\Game.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-29T18:54:53.714Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
