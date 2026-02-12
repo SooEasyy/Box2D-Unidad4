@@ -137,15 +137,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Cannon.cpp" />
+    <ClCompile Include="ContactListener.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Goal.cpp" />
+    <ClCompile Include="InfoScreen.cpp" />
+    <ClCompile Include="InfoScreen.h" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Objeto.cpp" />
     <ClCompile Include="Ragdoll.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Cannon.h" />
+    <ClInclude Include="ContactListener.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Goal.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Objeto.h" />
     <ClInclude Include="Ragdoll.h" />
   </ItemGroup>

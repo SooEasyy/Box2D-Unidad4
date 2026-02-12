@@ -1,162 +1,353 @@
-#include "Game.h"
+﻿#include "Game.h"
 #include <cmath>
+#include <iostream>
+#include "LevelManager.h"
+
 using namespace sf;
 using namespace std;
 
-void ContactListener::BeginContact(b2Contact* contact) {
-    b2Body* bodyA = contact->GetFixtureA()->GetBody();
-    b2Body* bodyB = contact->GetFixtureB()->GetBody();
-
-    if (bodyA->GetType() == b2_dynamicBody && !bodyA->IsAwake()) {
-        bodyA->SetAwake(true);
-    }
-    if (bodyB->GetType() == b2_dynamicBody && !bodyB->IsAwake()) {
-        bodyB->SetAwake(true);
-    }
-}
-
+/* =====================================================
+   CONSTRUCTOR DEL GAME
+   - Inicializa SFML
+   - Inicializa world de Box2D
+   - Carga menú / infoScreen
+   - Crea bordes físicos
+   - Inicializa LevelManager
+   ===================================================== */
 Game::Game() :
     window(VideoMode(800, 600), "Cannon Game"),
     world(b2Vec2(0.0f, 0.1f)),
     cannon(Vector2f(100, 500)),
     isFiring(false),
-    contactListener() { 
+    inMenu(true),
+    inInfoScreen(false)
+{
+    // Assets
+    AssetManager::get().loadTexture("cesped", "assets/grass.png");
+    AssetManager::get().loadTexture("muro_verde", "assets/grassed_brick.png");
+    AssetManager::get().loadTexture("piedra1", "assets/stone_brick.jpg");
+    AssetManager::get().loadTexture("piedra2", "assets/stone_brick2.jpg");
+    AssetManager::get().loadTexture("madera", "assets/wood.jpg");
+    AssetManager::get().loadTexture("goal", "assets/star.png");
+    AssetManager::get().loadTexture("colores", "assets/colors.png");
+    AssetManager::get().loadTexture("cadenas", "assets/chain.png");
 
-        world.SetContactListener(&contactListener); 
 
-        createBorders();
-        createObstacles(); 
+    // Contactos
+    world.SetContactListener(&contactListener);
+
+    // Crear manejador de niveles
+    levelManager = new LevelManager(&world);
+
+    // Cuando el Goal se toca, avanzar al siguiente nivel
+    contactListener.onGoalReached = [this]() {
+        pendingNextLevel = true;
+        };
+
+    // Menús
+    menu = new Menu(window);
+    infoScreen = new InfoScreen(window);
+
+    // Bordes físicos
+    createBorders();
+
+    // Fuente
+    if (!font.loadFromFile("arial.ttf")) {
+        cerr << "Error cargando la fuente!" << endl;
     }
 
+    ragdollCounter.setFont(font);
+    ragdollCounter.setCharacterSize(20);
+    ragdollCounter.setPosition(20, 20);
+    ragdollCounter.setFillColor(Color::White);
+    ragdollCounter.setString("Ragdolls restantes: " + to_string(ragdollCount));
+
+    // Pantalla de Victoria
+    winText.setFont(font);
+    winText.setString("¡Has ganado el juego!");
+    winText.setCharacterSize(60);
+    winText.setFillColor(sf::Color::Green);
+    winText.setPosition(120, 200);
+
+    // Pantalla de Derrota
+    loseText.setFont(font);
+    loseText.setString("Has perdido");
+    loseText.setCharacterSize(60);
+    loseText.setFillColor(sf::Color::Red);
+    loseText.setPosition(200, 200);
+
+}
+
+/* Destructor */
+Game::~Game()
+{
+    delete menu;
+    delete infoScreen;
+    delete levelManager;
+}
+
+
+/* =====================================================
+   LOOP PRINCIPAL
+   ===================================================== */
 void Game::run() {
     Clock clock;
     while (window.isOpen()) {
+
         processEvents();
-        Time deltaTime = clock.restart();
+
         update();
+
         render();
     }
 }
 
+/* =====================================================
+   EVENTOS
+   ===================================================== */
 void Game::processEvents() {
     Event event;
     while (window.pollEvent(event)) {
-        switch (event.type) {
-        case Event::Closed:
+
+        if (event.type == Event::Closed)
             window.close();
-            break;
-        case Event::MouseButtonPressed:
-            handlePlayerInput(event.mouseButton.button, true);
-            break;
-        case Event::MouseButtonReleased:
-            handlePlayerInput(event.mouseButton.button, false);
-            break;
+
+        // --- Clics del menú ---
+        if (event.type == Event::MouseButtonPressed) {
+
+            if (inMenu) {
+                Vector2i mousePos = Mouse::getPosition(window);
+                int action = menu->handleClick(mousePos);
+
+                if (action == 1)      inMenu = false;
+                else if (action == 2) { inInfoScreen = true; inMenu = false; }
+            }
+
+            else if (inInfoScreen) {
+                Vector2i mousePos = Mouse::getPosition(window);
+                if (infoScreen->handleClick(mousePos)) {
+                    inInfoScreen = false;
+                    inMenu = true;
+                }
+            }
+
+            // --- Disparo de ragdolls ---
+            else {
+                if (event.mouseButton.button == Mouse::Left && ragdollCount > 0)
+                    isFiring = true;
+            }
+        }
+
+        if (event.type == Event::MouseButtonReleased) {
+            if (event.mouseButton.button == Mouse::Left)
+                isFiring = false;
         }
     }
 }
 
+/* =====================================================
+   UPDATE — LÓGICA DEL JUEGO
+   ===================================================== */
 void Game::update() {
+
+    if (showLoseScreen)
+        return;
+
+    if (inMenu || inInfoScreen) return;
+
     cannon.update(window);
 
-    if (isFiring) {
+    // --- Disparo ---
+    if (isFiring && ragdollCount > 0) {
+
         Vector2i mousePosition = Mouse::getPosition(window);
         Vector2f cannonPosition = cannon.getPosition();
 
-        Vector2f direction = Vector2f(mousePosition.x, mousePosition.y) - cannonPosition;
-        float distance = sqrt(direction.x * direction.x + direction.y * direction.y);
-        direction /= distance; 
+        Vector2f direction = Vector2f(mousePosition) - cannonPosition;
+        float dist = sqrt(direction.x * direction.x + direction.y * direction.y);
+        direction /= dist;
 
-        float power = distance / 200.0f; 
+        float power = dist / 200.0f;
 
-        ragdolls.emplace_back(world, cannonPosition, power * direction);
+        ragdolls.emplace_back(&world, cannonPosition, power * direction);
+
+        ragdollCount--;
+        ragdollCounter.setString("Ragdolls restantes: " + to_string(ragdollCount));
+
+        // --- DERROTA ---
+        if (ragdollCount == 0)
+        {
+            checkingLose = true;   // ⬅️ empezamos a observar
+            loseTimer = 0.f;
+        }
 
         isFiring = false;
     }
 
-    for (auto& ragdoll : ragdolls) {
-        ragdoll.update();
+    world.Step(1.f / 60.f, 8, 3);
+
+    // --- Actualizar objetos ---
+    if (levelManager)
+        levelManager->Update();
+
+    // --- Actualizar ragdolls ---
+    for (auto& rag : ragdolls)
+        rag.update();
+
+    // Si el Goal fue tocado durante la colisión → cambiar de nivel después del Step
+    if (pendingNextLevel)
+    {
+        for (auto& rag : ragdolls)
+            rag.destroy(&world);
+
+        ragdolls.clear();
+
+        pendingNextLevel = false;
+        contactListener.levelAlreadyWon = false;
+        world.Step(0, 0, 0);
+        levelManager->NextLevel();
+
+        // Reiniciar ragdolls para el nuevo nivel
+        ragdolls.clear();
+        ragdollCount = 5;
+        ragdollCounter.setString("Ragdolls restantes: " + to_string(ragdollCount));
     }
 
-    for (auto& objeto : objetos) {
-        objeto.update();
+    // --- VICTORIA ---
+    if (levelManager->IsGameWon())
+    {
+        showWinScreen = true;
     }
 
-    world.Step(1 / 60.f, 8, 3);
+    // --- DERROTA ---
+    if (checkingLose && !pendingNextLevel && !showLoseScreen)
+    {
+        bool allStopped = true;
+
+        for (auto& rag : ragdolls)
+        {
+            if (!rag.IsSleeping())
+            {
+                allStopped = false;
+                break;
+            }
+        }
+
+        if (allStopped)
+        {
+            loseTimer += 1.f / 60.f;
+
+            // Espera pequeña para evitar falsos positivos
+            if (loseTimer > 1.0f)
+            {
+                showLoseScreen = true;
+                checkingLose = false;
+            }
+        }
+        else
+        {
+            loseTimer = 0.f; // si se vuelve a mover, reinicia
+        }
+    }
+
 }
 
+/* =====================================================
+   RENDER — DIBUJA TODO
+   ===================================================== */
 void Game::render() {
+
     window.clear();
 
-    for (const auto& border : borders) {
-        window.draw(border);
-    }
+    if (inMenu)
+        menu->draw();
 
-    for (auto& ragdoll : ragdolls) {
-        ragdoll.draw(window);
-    }
+    else if (inInfoScreen)
+        infoScreen->draw();
 
-    for (auto& objeto : objetos) {
-        objeto.draw(window);
-    }
 
-    cannon.draw(window);
+    else {
+
+        // Bordes
+        for (const auto& border : borders)
+            window.draw(border);
+
+        // Ragdolls
+        for (auto& rag : ragdolls)
+            rag.draw(window);
+
+        // Level Manager
+        levelManager->Draw(window);
+
+        // Cannon
+        cannon.draw(window);
+
+        // UI
+        window.draw(ragdollCounter);
+
+        if (showWinScreen)
+        {
+            window.clear(sf::Color::Black);
+            window.draw(winText);
+        }
+
+        if (showLoseScreen)
+        {
+            window.clear(sf::Color::Black);
+            window.draw(loseText);
+            window.display();
+            return;
+        }
+    }
 
     window.display();
 }
 
-void Game::handlePlayerInput(Mouse::Button button, bool isPressed) {
-    if (button == Mouse::Left) {
-        isFiring = isPressed;
-    }
-}
-
+/* =====================================================
+   bordes estáticos (físicos + gráficos)
+   ===================================================== */
 void Game::createBorders() {
+
     float thickness = 5.0f;
-    Vector2u windowSize = window.getSize();
+    Vector2u size = window.getSize();
 
-    RectangleShape topBorder(Vector2f(windowSize.x, thickness));
-    topBorder.setPosition(0, 0);
+    RectangleShape top({ float(size.x), thickness });
+    top.setPosition(0, 0);
 
-    RectangleShape bottomBorder(Vector2f(windowSize.x, thickness));
-    bottomBorder.setPosition(0, windowSize.y - thickness);
+    RectangleShape bottom({ float(size.x), thickness });
+    bottom.setPosition(0, size.y - thickness);
 
-    RectangleShape leftBorder(Vector2f(thickness, windowSize.y));
-    leftBorder.setPosition(0, 0);
+    RectangleShape left({ thickness, float(size.y) });
+    left.setPosition(0, 0);
 
-    RectangleShape rightBorder(Vector2f(thickness, windowSize.y));
-    rightBorder.setPosition(windowSize.x - thickness, 0);
+    RectangleShape right({ thickness, float(size.y) });
+    right.setPosition(size.x - thickness, 0);
 
-    borders.push_back(topBorder);
-    borders.push_back(bottomBorder);
-    borders.push_back(leftBorder);
-    borders.push_back(rightBorder);
+    borders = { top, bottom, left, right };
 
-    b2BodyDef groundBodyDef;
-    groundBodyDef.position.Set(0.0f, 0.0f);
+    // === Box2D bordes reales ===
+    b2BodyDef def;
+    b2Body* ground = world.CreateBody(&def);
 
-    b2Body* groundBody = world.CreateBody(&groundBodyDef);
+    b2EdgeShape edge;
 
-    b2EdgeShape groundBox;
+    float w = size.x / 30.f;
+    float h = size.y / 30.f;
 
-    groundBox.SetTwoSided(b2Vec2(0.0f, 0.0f), b2Vec2(windowSize.x / 30.0f, 0.0f));
-    groundBody->CreateFixture(&groundBox, 0.0f);
+    // top
+    edge.SetTwoSided(b2Vec2(0, 0), b2Vec2(w, 0));
+    ground->CreateFixture(&edge, 0);
 
-    groundBox.SetTwoSided(b2Vec2(0.0f, windowSize.y / 30.0f), b2Vec2(windowSize.x / 30.0f, windowSize.y / 30.0f));
-    groundBody->CreateFixture(&groundBox, 0.0f);
+    // bottom
+    edge.SetTwoSided(b2Vec2(0, h), b2Vec2(w, h));
+    ground->CreateFixture(&edge, 0);
 
-    groundBox.SetTwoSided(b2Vec2(0.0f, 0.0f), b2Vec2(0.0f, windowSize.y / 30.0f));
-    groundBody->CreateFixture(&groundBox, 0.0f);
+    // left
+    edge.SetTwoSided(b2Vec2(0, 0), b2Vec2(0, h));
+    ground->CreateFixture(&edge, 0);
 
-    groundBox.SetTwoSided(b2Vec2(windowSize.x / 30.0f, 0.0f), b2Vec2(windowSize.x / 30.0f, windowSize.y / 30.0f));
-    groundBody->CreateFixture(&groundBox, 0.0f);
+    // right
+    edge.SetTwoSided(b2Vec2(w, 0), b2Vec2(w, h));
+    ground->CreateFixture(&edge, 0);
 }
 
-void Game::createObstacles() {
-    // Est�ticos
-    objetos.emplace_back(world, Vector2f(400, 300), Vector2f(50, 50), true, Color::Magenta); 
-    objetos.emplace_back(world, Vector2f(600, 400), Vector2f(50, 50), true, Color::Magenta); 
-
-    // Din�micos
-    objetos.emplace_back(world, Vector2f(400, 200), Vector2f(30, 100), false, Color::Cyan); 
-    objetos.emplace_back(world, Vector2f(600, 300), Vector2f(30, 100), false, Color::Cyan); 
-}

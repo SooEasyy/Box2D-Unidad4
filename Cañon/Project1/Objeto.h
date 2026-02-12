@@ -7,14 +7,17 @@ using namespace sf;
 
 class Objeto {
 public:
-    Objeto(b2World& world, Vector2f position, Vector2f size, bool isStatic, Color color);
+    Objeto(b2World& world, Vector2f position, Vector2f size, bool isStatic, const std::string& textureName);
+    ~Objeto();
 
     void update();
     void draw(RenderWindow& window);
+    b2Body* getBody() { return body; }
 
 private:
     b2Body* body;
-    RectangleShape shape;
+    sf::Sprite sprite;
+    sf::Texture texture;
 };
 
 #endif // OBJETO_H

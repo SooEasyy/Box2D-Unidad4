@@ -1,36 +1,63 @@
-#include "Objeto.h"
+﻿#include "Objeto.h"
+#include <iostream>
+#include "AssetManager.h"
 using namespace sf;
 
-Objeto::Objeto(b2World& world, Vector2f position, Vector2f size, bool isStatic, Color color) {
+static const float SCALE = 30.f;
+
+Objeto::Objeto(b2World& world, Vector2f position, Vector2f size, bool isStatic, const std::string& textureName)
+{
     b2BodyDef bodyDef;
-    bodyDef.position.Set(position.x / 30.0f, position.y / 30.0f); 
-    bodyDef.type = isStatic ? b2_staticBody : b2_dynamicBody; 
+    bodyDef.type = isStatic ? b2_staticBody : b2_dynamicBody;
+
+    // ⚠ position en METROS
+    bodyDef.position.Set(position.x, position.y);
 
     body = world.CreateBody(&bodyDef);
 
-    b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(size.x / 60.0f, size.y / 60.0f); 
+    b2PolygonShape box;
+    box.SetAsBox(size.x / 2.f, size.y / 2.f);
 
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &dynamicBox;
-    fixtureDef.density = isStatic ? 0.0f : 1.0f; 
-    fixtureDef.friction = 0.3f;
+    b2FixtureDef fixture;
+    fixture.shape = &box;
+    fixture.density = isStatic ? 0.f : 1.f;
+    fixture.friction = 0.4f;
 
-    body->CreateFixture(&fixtureDef);
+    body->CreateFixture(&fixture);
 
-    shape.setSize(size); 
-    shape.setFillColor(color);
-    shape.setOrigin(size / 2.0f);
-    shape.setPosition(position);
+    // 🔵 VISUAL
+    sf::Texture& tex = AssetManager::get().getTexture(textureName);
+
+    sprite.setTexture(tex);
+    sprite.setOrigin(
+        tex.getSize().x / 2.f,
+        tex.getSize().y / 2.f
+    );
+
+    sprite.setScale(
+        (size.x * 30.f) / tex.getSize().x,
+        (size.y * 30.f) / tex.getSize().y
+    );
 }
 
-void Objeto::update() {
-    b2Vec2 position = body->GetPosition();
+Objeto::~Objeto()
+{
+    if (body)
+    {
+        body->GetWorld()->DestroyBody(body);
+        body = nullptr;
+    }
+}
+
+void Objeto::update()
+{
+    b2Vec2 pos = body->GetPosition();
     float angle = body->GetAngle();
-    shape.setPosition(position.x * 30.0f, position.y * 30.0f); 
-    shape.setRotation(angle * 180.0f / 3.14159f); 
+
+    sprite.setPosition(pos.x * 30.f, pos.y * 30.f);
+    sprite.setRotation(angle * 180.f / b2_pi);
 }
 
 void Objeto::draw(RenderWindow& window) {
-    window.draw(shape);
+    window.draw(sprite);
 }
