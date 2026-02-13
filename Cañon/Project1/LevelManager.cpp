@@ -1,13 +1,13 @@
 ﻿#include "LevelManager.h"
 
-/* Constructor: inicializa variables */
+// Constructor: inicializa variables 
 LevelManager::LevelManager(b2World* world)
     : world(world), currentLevel(nullptr), currentLevelId(1), gameWon(false)
 {
     LoadLevel(currentLevelId);
 }
 
-/* LoadLevel: destruye el nivel previo y crea uno nuevo */
+// LoadLevel: destruye el nivel previo y crea uno nuevo
 void LevelManager::LoadLevel(int id)
 {
     gameWon = false;
@@ -24,7 +24,7 @@ void LevelManager::LoadLevel(int id)
     currentLevel->Load();
 }
 
-/* NextLevel: carga el siguiente nivel (puedes agregar tope si querés) */
+// NextLevel: carga el siguiente nivel (puedes agregar tope si querés) 
 void LevelManager::NextLevel()
 {
     currentLevelId++;
@@ -39,7 +39,7 @@ void LevelManager::NextLevel()
     LoadLevel(currentLevelId);
 }
 
-/* Draw: re-direcciona al nivel actual */
+// Draw: re-direcciona al nivel actual 
 void LevelManager::Draw(sf::RenderWindow& window)
 {
     if (!gameWon && currentLevel)

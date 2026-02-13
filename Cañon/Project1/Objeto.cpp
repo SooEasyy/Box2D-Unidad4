@@ -10,7 +10,7 @@ Objeto::Objeto(b2World& world, Vector2f position, Vector2f size, bool isStatic, 
     b2BodyDef bodyDef;
     bodyDef.type = isStatic ? b2_staticBody : b2_dynamicBody;
 
-    // ⚠ position en METROS
+    // position en METROS
     bodyDef.position.Set(position.x, position.y);
 
     body = world.CreateBody(&bodyDef);
@@ -25,7 +25,7 @@ Objeto::Objeto(b2World& world, Vector2f position, Vector2f size, bool isStatic, 
 
     body->CreateFixture(&fixture);
 
-    // 🔵 VISUAL
+    // VISUAL
     sf::Texture& tex = AssetManager::get().getTexture(textureName);
 
     sprite.setTexture(tex);

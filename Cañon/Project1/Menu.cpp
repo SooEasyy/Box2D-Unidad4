@@ -1,6 +1,6 @@
-// Menu.cpp
 #include "Menu.h"
 
+// Pantalla del Menu del juego
 Menu::Menu(sf::RenderWindow& win) : window(win) {
     if (!font.loadFromFile("arial.ttf")) {
         std::cerr << "Error cargando la fuente!" << std::endl;

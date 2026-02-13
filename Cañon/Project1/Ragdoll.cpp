@@ -2,9 +2,6 @@
 
 using namespace sf;
 
-// ----------------------------------------------------
-// Constructor
-// ----------------------------------------------------
 Ragdoll::Ragdoll(b2World* world, Vector2f positionPixels, Vector2f velocityPixels)
 {
     // Convertimos UNA VEZ a metros
@@ -13,7 +10,7 @@ Ragdoll::Ragdoll(b2World* world, Vector2f positionPixels, Vector2f velocityPixel
         positionPixels.y / SCALE
     );
 
-    // 🔵 TORSO
+    // TORSO
     b2Body* torso = createLimb(
         *world,
         basePos,
@@ -22,7 +19,7 @@ Ragdoll::Ragdoll(b2World* world, Vector2f positionPixels, Vector2f velocityPixel
         Color::Green
     );
 
-    // 🔴 CABEZA
+    // CABEZA
     b2Body* head = createLimb(
         *world,
         basePos + b2Vec2(0.f, -1.5f),
@@ -32,7 +29,7 @@ Ragdoll::Ragdoll(b2World* world, Vector2f positionPixels, Vector2f velocityPixel
     );
     createJoint(*world, torso, head, torso->GetWorldCenter() + b2Vec2(0.f, -1.0f));
 
-    // 🔵 BRAZO IZQUIERDO
+    // BRAZO IZQUIERDO
     b2Body* leftArm = createLimb(
         *world,
         basePos + b2Vec2(-0.9f, -0.5f),
@@ -42,7 +39,7 @@ Ragdoll::Ragdoll(b2World* world, Vector2f positionPixels, Vector2f velocityPixel
     );
     createJoint(*world, torso, leftArm, torso->GetWorldCenter() + b2Vec2(-0.6f, -0.4f));
 
-    // 🔵 BRAZO DERECHO
+    // BRAZO DERECHO
     b2Body* rightArm = createLimb(
         *world,
         basePos + b2Vec2(0.9f, -0.5f),
@@ -52,7 +49,7 @@ Ragdoll::Ragdoll(b2World* world, Vector2f positionPixels, Vector2f velocityPixel
     );
     createJoint(*world, torso, rightArm, torso->GetWorldCenter() + b2Vec2(0.6f, -0.4f));
 
-    // 🟡 PIERNA IZQUIERDA
+    // PIERNA IZQUIERDA
     b2Body* leftLeg = createLimb(
         *world,
         basePos + b2Vec2(-0.4f, 1.8f),
@@ -62,7 +59,7 @@ Ragdoll::Ragdoll(b2World* world, Vector2f positionPixels, Vector2f velocityPixel
     );
     createJoint(*world, torso, leftLeg, torso->GetWorldCenter() + b2Vec2(-0.3f, 1.0f));
 
-    // 🟡 PIERNA DERECHA
+    // PIERNA DERECHA
     b2Body* rightLeg = createLimb(
         *world,
         basePos + b2Vec2(0.4f, 1.8f),

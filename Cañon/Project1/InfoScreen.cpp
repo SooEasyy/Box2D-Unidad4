@@ -1,6 +1,6 @@
-// InfoScreen.cpp
 #include "InfoScreen.h"
 
+//Pantalla de informacion del juego
 InfoScreen::InfoScreen(sf::RenderWindow& win) : window(win) {
     if (!font.loadFromFile("arial.ttf")) {
         std::cerr << "Error cargando la fuente!" << std::endl;

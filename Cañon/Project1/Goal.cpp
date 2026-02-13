@@ -22,7 +22,6 @@ Goal::Goal(b2World* world, float x, float y)
 
     body->CreateFixture(&fixture);
 
-    // 👈 MUY IMPORTANTE
     body->GetUserData().pointer = 2;
 
     // --- SPRITE ---

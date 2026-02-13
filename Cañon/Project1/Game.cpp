@@ -6,14 +6,14 @@
 using namespace sf;
 using namespace std;
 
-/* =====================================================
-   CONSTRUCTOR DEL GAME
-   - Inicializa SFML
-   - Inicializa world de Box2D
-   - Carga menú / infoScreen
-   - Crea bordes físicos
-   - Inicializa LevelManager
-   ===================================================== */
+/*=====================================================
+Inicializa ventana, mundo físico Box2D y managers
+Carga assets y configura UI del juego
+Carga menú / infoScreen
+Crea bordes físicos
+Inicializa LevelManager
+=====================================================*/
+   
 Game::Game() :
     window(VideoMode(800, 600), "Cannon Game"),
     world(b2Vec2(0.0f, 0.1f)),
